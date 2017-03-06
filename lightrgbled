@@ -1,0 +1,49 @@
+#!/bin/bash
+
+source /etc/conf.d/repoled
+
+if [ -z "$LEDGPIO1" ]; then
+        echo "LED GPIOs not specified" 1>&2
+        exit 3
+fi
+if [ -z "$LEDGPIO2" ]; then
+        echo "LED GPIOs not specified" 1>&2
+        exit 3
+fi
+if [ -z "$LEDGPIO3" ]; then
+        echo "LED GPIOs not specified" 1>&2
+        exit 3
+fi
+
+
+gpio -g mode $LEDGPIO1 out
+gpio -g mode $LEDGPIO2 out
+gpio -g mode $LEDGPIO3 out
+lightup() {
+	gpio -g write $LEDGPIO1 $1
+	gpio -g write $LEDGPIO2 $2
+	gpio -g write $LEDGPIO3 $3
+}
+lightred() {
+	lightup 1 0 0
+}
+lightgreen() {
+	lightup 0 1 0
+}
+lightcyan() {
+	lightup 0 1 1
+}
+lightoff() {
+	lightup 0 0 0
+}
+
+val=$1
+if [ $val == -1 ]; then
+	lightoff
+elif [ $val == 0 ]; then
+	lightgreen
+elif [ $val == 1 ]; then
+	lightred
+else
+	lightcyan
+fi

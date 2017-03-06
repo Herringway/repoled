@@ -1,0 +1,16 @@
+#!/bin/sh
+
+source /etc/conf.d/repoled
+
+BUILDSTATUS=0
+
+for repo in ${REPOS[@]}; do
+	repostatus $repo
+	RESULT=$?
+	if [ $RESULT != 0 ]; then
+		BUILDSTATUS=$RESULT
+		break;
+	fi
+done
+
+lightrgbled $BUILDSTATUS
