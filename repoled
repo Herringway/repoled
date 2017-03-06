@@ -1,10 +1,10 @@
 #Configuration for REPOLED script
 
 #Repos to check build status for
-REPOS=(Herringway/multiasm Herringway/mathheroes Herringway/WYAML Herringway/natcmp Herringway/bft Herringway/D-comp Herringway/timestream Herringway/siryul)
+REPOS=()
 
 #GPIO Pins for RGB LED
-LEDGPIO1=16
-LEDGPIO2=20
-LEDGPIO3=21
+LEDGPIO1=
+LEDGPIO2=
+LEDGPIO3=
 
